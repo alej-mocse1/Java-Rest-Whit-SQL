@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import com.restapi.api.dao.userDao.interfaces.interfaceUserDAO;
 import com.restapi.api.entities.User;
+import com.restapi.api.generics.collectionGeneric;
+import com.restapi.api.generics.printElements;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -17,6 +19,7 @@ public class userDAOimp implements interfaceUserDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
+
 
     /// read
     @Override
@@ -33,6 +36,13 @@ public class userDAOimp implements interfaceUserDAO {
     @Transactional
     public User userFindByID(Long ID) {
         User user = entityManager.find(User.class, ID);
+
+      
+        // usamos la clase generica para guardar el elemento
+        // luego usamos la funcion generica para imprimir el elemento
+        collectionGeneric <String> userGeneric = new collectionGeneric<>("usamos el generico v2");
+
+        printElements.viewElement( userGeneric.getElement());
 
     // Validar que el usuario no sea nulo
     if (user != null) {
